@@ -1,5 +1,9 @@
-from serializers import ProductSerializer, CategorySerializer
-from models import Category, Product
+from abstract.utils import get_obj_or_404
+from account.models import User
+
+from .serializers import ProductSerializer, CategorySerializer
+from .models import Category, Product
+
 
 def product_list():
     data = ProductSerializer().serialize_queryset()
@@ -11,23 +15,24 @@ def product_create():
     desc = input("Введите описание: ")
     quantity = input("Введите кол-во: ")
     print("Выберите категорию: ")
-    for i, c in enumerate(Category.objects):
-        print(f"{i}: {c.title}")
-    category = Category.objects[int(input())]
+    for c in Category.objects:
+        print(c.title)
+    category = get_obj_or_404(Category, "title", input())
     Product(title, price, desc, quantity, category)
     return "Продукт успешно создан"
 
 def product_delete(p_id):
-    Product.objects.pop(int(p_id))
+    product = get_obj_or_404(Product, "id", int(p_id))
+    Product.objects.remove(product)
     return "Продукт успешно удален"
 
 def product_detail(p_id):
-    product = Product.objects[int(p_id)]
+    product = get_obj_or_404(Product, "id", int(p_id))
     data = ProductSerializer().serialize_obj(product)
     return data
 
 def product_update(p_id):
-    product = Product.objects[int(p_id)]
+    product = get_obj_or_404(Product, "id", int(p_id))
     field = input("Введите поле для изменения: ")
     if field in dir(product):
         value = input(f"{field} = ")

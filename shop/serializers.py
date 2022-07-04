@@ -1,6 +1,7 @@
 from abstract.serializer import BaseSerializer
 
-from models import Category, Product
+from .models import Category, Product
+
 
 class ProductSerializer(BaseSerializer):
     class Meta:

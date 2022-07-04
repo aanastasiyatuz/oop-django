@@ -1,5 +1,8 @@
-from models import Category, Product
+from pprint import pprint
+
+from shop.models import Category, Product
 from urls import urlpatterns
+
 
 cat = Category("phones")
 Product("iphone", 345, "Iphone 10", 2, cat)
@@ -16,9 +19,12 @@ while True:
     for uri, view in urlpatterns:
         if url == uri.split("/")[0]:
             found = True
-            if arg:
-                print(view(arg))
-            else:
-                print(view())
+            try:
+                if arg:
+                    pprint(view(arg))
+                else:
+                    pprint(view())
+            except Exception as e:
+                print(e)
     if not found:
-        print("404 Not found")
+        print("404 Url Not found")

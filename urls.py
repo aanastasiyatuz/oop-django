@@ -1,4 +1,5 @@
-from views import product_list, product_create, product_delete, product_detail, product_update, create_category, category_list
+from shop.views import product_list, product_create, product_delete, product_detail, product_update, create_category, category_list
+from account import urls
 
 urlpatterns = [
     ('products/', product_list),
@@ -10,3 +11,4 @@ urlpatterns = [
     ('categories/', category_list),
     ('category-create/', create_category),
 ]
+urlpatterns += urls.urlpatterns
