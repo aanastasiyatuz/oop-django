@@ -1,6 +1,5 @@
 class BaseSerializer:
     class Meta:
-        model = None
         fields = []
         queryset = []
 

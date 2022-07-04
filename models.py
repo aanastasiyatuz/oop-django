@@ -14,12 +14,13 @@ class Product:
     objects = []
     _id = 0
 
-    def __init__(self, title, price, description, quantity):
+    def __init__(self, title, price, description, quantity, category):
         self.id = Product._id
         self.title = title
         self.price = price
         self.desc = description
         self.quantity = quantity
+        self.category = category
         Product.objects.append(self)
         Product._id += 1
 

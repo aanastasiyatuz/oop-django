@@ -1,9 +1,10 @@
-from models import Product
+from models import Category, Product
 from urls import urlpatterns
 
-Product("iphone", 345, "Iphone 10", 2)
-Product("samsung", 54, "Samsung...", 4)
-Product("lenovo", 12, "Lenovo...", 12)
+cat = Category("phones")
+Product("iphone", 345, "Iphone 10", 2, cat)
+Product("samsung", 54, "Samsung...", 4, cat)
+Product("lenovo", 12, "Lenovo...", 12, cat)
 
 while True:
     try:
