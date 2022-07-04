@@ -8,16 +8,17 @@ class BaseSerializer:
         representation = {}
         for field in fields:
             data = obj.__getattribute__(field)
-            representation[field] = data
+            representation[field] = str(data)
         return representation
     
-    def serialize_queryset(self):
-        queryset = self.Meta.queryset
+    def serialize_queryset(self, queryset=None):
+        if queryset is None:
+            queryset = self.Meta.queryset
         representation = []
         for obj in queryset:
             representation.append(self.serialize_obj(obj))
         return representation
-    
+
     # @property
     # def data(self):
     #     import json

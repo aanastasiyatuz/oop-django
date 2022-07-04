@@ -1,8 +1,8 @@
 from abstract.utils import get_obj_or_404
 from account.models import User
 
-from .serializers import ProductSerializer, CategorySerializer
-from .models import Category, Product
+from .serializers import CommentSerializer, ProductSerializer, CategorySerializer
+from .models import Category, Comment, Product
 
 
 def product_list():
@@ -48,3 +48,18 @@ def create_category():
     title = input("Введите название: ")
     Category(title)
     return "Категория была успешно создана"
+
+def create_comment(email):
+    user = get_obj_or_404(User, "email", email)
+    print("Выберите продукт: ")
+    for p in Product.objects:
+        print(p.title)
+    title = input()
+    product = get_obj_or_404(Product, "title", title)
+    body = input("Введите комментарий: ")
+    Comment(user, product, body)
+    return "Комментарий успешно добавлен"
+
+def comments_list():
+    data = CommentSerializer().serialize_queryset()
+    return data
