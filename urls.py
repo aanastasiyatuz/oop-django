@@ -3,7 +3,7 @@ from account import urls
 
 urlpatterns = [
     ('products/', product_list),
-    ('create-product/', product_create),
+    ('add-product/', product_create),
     ('delete-product/id', product_delete),
     ('product-detail/id', product_detail),
     ('product-update/id', product_update),
@@ -12,7 +12,7 @@ urlpatterns = [
     ('category-create/', create_category),
 
     ('comments/', comments_list),
-    ('create-comment/email', create_comment),
+    ('add-comment/email', create_comment),
 
     ('add-like/email', add_like)
 ]

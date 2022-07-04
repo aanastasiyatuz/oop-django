@@ -1,4 +1,4 @@
-import permissions
+from abstract import permissions
 
 class Category:
     objects = []
