@@ -2,7 +2,7 @@ from abstract.utils import get_obj_or_404
 from account.models import User
 
 from .serializers import CommentSerializer, ProductSerializer, CategorySerializer
-from .models import Category, Comment, Product
+from .models import Category, Comment, Like, Product
 
 
 def product_list():
@@ -17,7 +17,7 @@ def product_create():
     print("Выберите категорию: ")
     for c in Category.objects:
         print(c.title)
-    category = get_obj_or_404(Category, "title", input())
+    category = get_obj_or_404(Category, "title", input("================\n"))
     Product(title, price, desc, quantity, category)
     return "Продукт успешно создан"
 
@@ -54,7 +54,7 @@ def create_comment(email):
     print("Выберите продукт: ")
     for p in Product.objects:
         print(p.title)
-    title = input()
+    title = input("================\n")
     product = get_obj_or_404(Product, "title", title)
     body = input("Введите комментарий: ")
     Comment(user, product, body)
@@ -63,3 +63,13 @@ def create_comment(email):
 def comments_list():
     data = CommentSerializer().serialize_queryset()
     return data
+
+def add_like(email):
+    user = get_obj_or_404(User, "email", email)
+    print("Выберите продукт: ")
+    for p in Product.objects:
+        print(f"{p.id}: {p.title}")
+    p_id = input("================\n")
+    product = get_obj_or_404(Product, "id", int(p_id))
+    Like(user, product)
+    return "Лайк успешно поставлен"

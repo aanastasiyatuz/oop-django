@@ -34,6 +34,14 @@ class Product:
             if c.product == self:
                 comments_.append(c)
         return comments_
+    
+    @property
+    def likes(self):
+        likes_ = []
+        for l in Like.objects:
+            if l.product == self:
+                likes_.append(l)
+        return likes_
 
 class Comment:
     objects = []
@@ -49,3 +57,12 @@ class Comment:
     
     def __str__(self):
         return f"{self.user.email} - [{self.created_at}] - {self.body}"
+
+class Like:
+    objects = []
+
+    def __init__(self, user, product):
+        permissions.login_required(user)
+        self.user = user
+        self.product = product
+        Like.objects.append(self)

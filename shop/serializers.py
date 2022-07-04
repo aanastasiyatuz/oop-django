@@ -12,6 +12,7 @@ class ProductSerializer(BaseSerializer):
         representation = super().serialize_obj(obj)
         representation['category'] = obj.category.title
         representation['comments'] = CommentSerializer().serialize_queryset(obj.comments)
+        representation['likes'] = len(obj.likes)
         return representation
 
 class CategorySerializer(BaseSerializer):
